@@ -1,6 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
-import { Router, Event, NavigationEnd, RouterEvent, Scroll } from '@angular/router';
+import { Router, Event, NavigationEnd } from '@angular/router';
 import { DataService, Msg } from 'src/app/services/data/data.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subscription } from 'rxjs';
