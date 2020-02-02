@@ -1,0 +1,22 @@
+<section class="section">
+    <div class="container">
+        <p>status: {{profileForm.status}}</p>
+        <p>value: {{profileForm.value.firstName}}</p>
+        <hr>
+        <p>Name is: {{getName()}}</p>
+        <button (click)='setName()'>SetName</button>
+        <form class="form" [formGroup]="profileForm">
+
+            <label>
+                First Name:
+                <input type="text" formControlName="firstName">
+            </label>
+
+            <label>
+                Last Name:
+                <input type="text" formControlName="lastName">
+            </label>
+
+        </form>
+    </div>
+</section>
