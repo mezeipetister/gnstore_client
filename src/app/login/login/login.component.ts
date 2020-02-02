@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,7 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  isUsernameValid: boolean = true;
-  isPasswordValid: boolean = true;
+  error: string | null = null;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -21,29 +22,16 @@ export class LoginComponent implements OnInit {
 
   }
 
-  validateForm() {
-    this.isPasswordValid = true;
-    this.isUsernameValid = true;
-    if (this.username.length == 0) {
-      this.isUsernameValid = false;
-    }
-    if (this.password.length == 0) {
-      this.isPasswordValid = false;
-    }
-  }
-
   login() {
-    this.validateForm();
-    if (this.isUsernameValid && this.isPasswordValid) {
-      this.loginService.login(this.username, this.password).subscribe((r) => {
-        if (r) {
-          let redirect = this.loginService.redirectUrl
-            ? this.router.parseUrl(this.loginService.redirectUrl)
-            : '/';
-          this.router.navigateByUrl(redirect);
-        }
-      });
-    }
+    this.loginService.login(this.username, this.password).subscribe((r) => {
+      if (r) {
+        let redirect = this.loginService.redirectUrl
+          ? this.router.parseUrl(this.loginService.redirectUrl)
+          : '/';
+        this.router.navigateByUrl(redirect);
+      }
+    },
+      (error) => this.error = error.error.status)
   }
 
 }

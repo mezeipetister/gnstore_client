@@ -1,10 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
-import { Router } from '@angular/router';
+import { Router, Event, NavigationEnd, RouterEvent, Scroll } from '@angular/router';
 import { DataService, Msg } from 'src/app/services/data/data.service';
-import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +12,23 @@ import { Observable, of } from 'rxjs';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router, private ds: DataService, private http: HttpClient) { }
+  constructor(private loginService: LoginService, private router: Router, private ds: DataService, private http: HttpClient) {
+    this.routerObserver = router.events.subscribe((e: Event) => {
+      /**
+       * IF Router Event
+       */
+      if (e instanceof NavigationEnd) {
+        this.isActive = false;
+      }
+    });
+  }
 
   isActive: boolean = false;
   quick$: Observable<Msg>;
+  routerObserver: Subscription;
 
   ngOnInit() {
+
   }
 
   tryQuick() {

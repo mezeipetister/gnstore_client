@@ -65,7 +65,7 @@ export class LoginService {
           observer.next(true);
         },
         error: (err) => {
-          observer.next(false)
+          observer.error(err)
         },
         complete: () => observer.complete()
       })
