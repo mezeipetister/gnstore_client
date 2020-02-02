@@ -4,33 +4,35 @@
         <p class="subtitle has-text-centered is-size-5">Bejelentkezés a Gardenova Kft <br> eladói rendszerébe</p>
         <div class="columns is-mobile">
             <div class="column is-6-mobile is-offset-3-mobile is-4-desktop is-offset-4-desktop">
-                <form (ngSubmit)="login()">
+                <form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="off">
                     <div class="field">
                         <label class="label">Felhasználói név</label>
                         <div class="control has-icons-right">
                             <input class="input" type="text" placeholder="e.g John Smith" [(ngModel)]="username"
-                                name="username">
-                            <span class="icon is-small is-right" *ngIf='!isUsernameValid'>
+                                name="username" #uname="ngModel" required minlength="3">
+                            <span class="icon is-small is-right" *ngIf='uname.invalid && (uname.dirty)'>
                                 <i class="fas fa-exclamation-triangle"></i>
                             </span>
                         </div>
-                        <p class="help is-danger" *ngIf='!isUsernameValid'>Nem megfelelő felhasználói név</p>
+                        <p class="help is-danger" *ngIf='uname.invalid && (uname.dirty || uname.touched)'>Nem megfelelő
+                            felhasználói név</p>
                     </div>
                     <div class="field">
                         <label class="label">Jelszó</label>
                         <div class="control has-icons-right">
                             <input class="input" type="password" placeholder="erős jelszó" [(ngModel)]="password"
-                                name="password">
-                            <span class="icon is-small is-right" *ngIf='!isPasswordValid'>
+                                name="password" #pwd="ngModel" required>
+                            <span class="icon is-small is-right" *ngIf='pwd.invalid && (pwd.dirty || pwd.touched)'>
                                 <i class="fas fa-exclamation-triangle"></i>
                             </span>
                         </div>
-                        <p class="help is-danger" *ngIf='!isPasswordValid'>Hibás jelszó</p>
+                        <p class="help is-danger" *ngIf='pwd.invalid'>Hibás jelszó</p>
                     </div>
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit">Bejelentkezés</button>
+                                <button class="button is-info is-outlined" type="submit"
+                                    [disabled]="!loginForm.form.valid">Bejelentkezés</button>
                                 <button class="button" type="button" routerLink='./elfelejtett-jelszo'>Elfelejtett
                                     jelszó</button>
                             </div>
