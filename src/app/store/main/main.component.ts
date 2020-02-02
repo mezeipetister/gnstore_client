@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -22,6 +22,15 @@ export class MainComponent implements OnInit {
 
   constructor(private title: Title) {
     title.setTitle('Gardenova áruház');
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    console.log(event);
+
+    if (event.key === 'Escape' || event.key === 'F1') {
+      this.setSceneMain();
+    }
   }
 
   setSceneMain() {
