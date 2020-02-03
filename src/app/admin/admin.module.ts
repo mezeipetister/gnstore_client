@@ -7,7 +7,8 @@ import { Page2Component as AdminPage2 } from './page2/page2.component';
 import { LayoutComponent } from './layout/layout.component';
 import { NavbarComponent } from './partial/navbar/navbar.component';
 import { PosComponent } from './pos/pos.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -15,10 +16,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminPage2,
     LayoutComponent,
     NavbarComponent,
-    PosComponent
+    PosComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     AdminRouter,
   ]
