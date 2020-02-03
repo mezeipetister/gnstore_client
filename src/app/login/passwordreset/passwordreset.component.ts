@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResetPassword } from 'src/app/class/reset-password';
 import { ErrorResponse } from 'src/app/class/error-response';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-passwordreset',
@@ -15,6 +16,7 @@ export class PasswordresetComponent implements OnInit {
   isValid: boolean = true;
   error: ErrorResponse = null;
   isOk: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private http: HttpClient) { }
 
@@ -24,9 +26,13 @@ export class PasswordresetComponent implements OnInit {
   resetPassword() {
     if (this.email.length > 0 && this.email.includes('@')) {
       this.isValid = true;
+      this.isLoading = true;
       this.http.post('/login/reset_password', new ResetPassword(this.email)).subscribe(
         () => this.isOk = true,
-        (err) => this.error = err.error);
+        (err) => {
+          this.error = err.error;
+          this.isLoading = false;
+        })
     } else {
       this.isValid = false;
     }

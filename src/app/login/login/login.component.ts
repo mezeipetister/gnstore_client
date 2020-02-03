@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string;
 
   error: string | null = null;
+  isLoading: boolean = false;
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -23,7 +24,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.isLoading = true;
     this.loginService.login(this.username, this.password).subscribe((r) => {
+      this.isLoading = false;
       if (r) {
         let redirect = this.loginService.redirectUrl
           ? this.router.parseUrl(this.loginService.redirectUrl)
@@ -31,7 +34,10 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl(redirect);
       }
     },
-      (error) => this.error = error.error.message)
+      (error) => {
+        this.isLoading = false;
+        this.error = error.error.message;
+      })
   }
 
 }

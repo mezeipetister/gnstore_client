@@ -16,29 +16,29 @@
                         <label class="label">Felhasználói név</label>
                         <div class="control has-icons-right">
                             <input class="input" type="text" placeholder="e.g John Smith" [(ngModel)]="username"
-                                name="username" #uname="ngModel" required minlength="3">
-                            <span class="icon is-small is-right" *ngIf='uname.invalid && (uname.dirty)'>
+                                name="username" #uname="ngModel" required readonly
+                                onfocus="this.removeAttribute('readonly');" autocomplete="off">
+                            <span class="icon is-small is-right" *ngIf='uname.invalid && (uname.dirty || pwd.touched)'>
                                 <i class="fas fa-exclamation-triangle"></i>
                             </span>
                         </div>
-                        <p class="help is-danger" *ngIf='uname.invalid && (uname.dirty || uname.touched)'>Nem megfelelő
-                            felhasználói név</p>
                     </div>
                     <div class="field">
                         <label class="label">Jelszó</label>
                         <div class="control has-icons-right">
                             <input class="input" type="password" placeholder="erős jelszó" [(ngModel)]="password"
-                                name="password" #pwd="ngModel" required>
+                                name="password" #pwd="ngModel" required readonly
+                                onfocus="this.removeAttribute('readonly');" autocomplete="off">
                             <span class="icon is-small is-right" *ngIf='pwd.invalid && (pwd.dirty || pwd.touched)'>
                                 <i class="fas fa-exclamation-triangle"></i>
                             </span>
                         </div>
-                        <p class="help is-danger" *ngIf='pwd.invalid'>Hibás jelszó</p>
                     </div>
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit">Bejelentkezés</button>
+                                <button class="button is-info is-outlined" type="submit"
+                                    [class.is-loading]='isLoading'>Bejelentkezés</button>
                                 <button class="button" type="button" routerLink='./elfelejtett-jelszo'>Elfelejtett
                                     jelszó</button>
                             </div>
