@@ -3,7 +3,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { DataService, Msg } from 'src/app/services/data/data.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, Subscription, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { ErrorResponse } from 'src/app/class/error-response';
 
 @Component({
   selector: 'app-navbar',
@@ -24,20 +26,24 @@ export class NavbarComponent implements OnInit {
   }
 
   isActive: boolean = false;
-  quick$: Observable<Msg>;
+  quick$: Observable<ErrorResponse>;
   routerObserver: Subscription;
+  username: string = '';
 
   ngOnInit() {
-
+    this.username = this.loginService.getUserName();
   }
 
   tryQuick() {
     this.ds.getQuick().subscribe({ next: (val) => console.log(val), error: (err) => console.log(err) });
   }
 
-  letQuick() {
-    this.quick$ = this.http.get<Msg>('/quick');
-  }
+  // letQuick() {
+  //   this.quick$ = this.http.get<ErrorResponse>('/quick').pipe(catchError((err) => {
+  //     console.log(err.error);
+  //     return of(new Msg(''));
+  //   }));
+  // }
 
   logout() {
     let url = this.router.url;

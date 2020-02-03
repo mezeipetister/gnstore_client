@@ -3,6 +3,7 @@ import { Subject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { retry, delay, retryWhen, mergeMap, tap, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Token } from 'src/app/class/token';
 
 @Injectable({
   providedIn: 'root'
@@ -41,18 +42,16 @@ export class DataService {
     return (new Request(this.http)).get('/long');
   }
 
-  login(username: string, password: string): Observable<Login> {
+  login(username: string, password: string): Observable<Token> {
     return (new Request(this.http)).post('/login', { username: username, password: password });
   }
 
 }
 
-export interface Msg {
-  msg: string,
-}
-
-export class Login {
-  token: string
+export class Msg {
+  constructor(
+    public msg: string,
+  ) { }
 }
 
 // class Options {

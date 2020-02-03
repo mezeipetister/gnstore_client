@@ -26,8 +26,6 @@ export class MainComponent implements OnInit {
 
   @HostListener('window:keyup', ['$event'])
   keyEvent(event: KeyboardEvent) {
-    console.log(event);
-
     if (event.key === 'Escape' || event.key === 'F1') {
       this.setSceneMain();
     }

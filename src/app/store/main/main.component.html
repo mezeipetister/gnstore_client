@@ -50,15 +50,19 @@
                 </div>
             </div>
             <div class="container has-text-centered" *ngSwitchCase="0">
-                <p class="content"><span class="icon"><i class="fas fa-apple-alt fa-10x"></i></span></p>
-                <h1 class="title">Gardenova</h1>
-                <p class="subtitle">Kertész technológiai áruház</p>
-                <p class="content">4522 Nyírtass, Bem út 23/B. Magyarország
-                    <br><a href="mailto:hello@gardenova.hu">hello@gardenova.hu</a>
-                </p>
-                <div class="buttons has-addons is-centered">
-                    <button class="button" (click)='setSceneDetails()'>Céges adatok</button>
-                    <button class="button" (click)='setSceneOpenings()'>Nyitvatartás</button>
+                <div class="columns">
+                    <div class="column is-4-desktop is-offset-4-desktop">
+                        <p class="content"><span class="icon"><i class="fas fa-apple-alt fa-10x"></i></span></p>
+                        <h1 class="title">Gardenova</h1>
+                        <p class="subtitle">Kertész technológiai áruház</p>
+                        <p class="content">4522 Nyírtass, Bem út 23/B. Magyarország
+                            <br><a href="mailto:hello@gardenova.hu">hello@gardenova.hu</a>
+                        </p>
+                        <div class="buttons has-addons is-centered">
+                            <button class="button" (click)='setSceneDetails()'>Céges adatok</button>
+                            <button class="button" (click)='setSceneOpenings()'>Nyitvatartás</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </ng-container>

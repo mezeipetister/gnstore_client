@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Subject, EMPTY, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DataService, Login } from '../data/data.service';
+import { DataService } from '../data/data.service';
 import { Ok, Err, Result } from 'ts-results';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Token } from 'src/app/class/token';
 
 @Injectable({
   providedIn: 'root'
@@ -37,9 +38,10 @@ export class LoginService {
   //   this.isLoggedIn.next(status);
   // }
 
-  setToken(token: string): Result<void, Error> {
+  setToken(token: Token): Result<void, Error> {
     try {
-      localStorage.setItem('token', token);
+      localStorage.setItem('token', token.token);
+      localStorage.setItem('username', token.username);
       // Notify login subscribers
       // this.notifyLoginStatus(true);
       return Ok.EMPTY;
@@ -48,6 +50,13 @@ export class LoginService {
       // this.notifyLoginStatus(false);
       return new Err(e);
     }
+  }
+
+  getUserName(): string {
+    if (localStorage.getItem('username') != null) {
+      return localStorage.getItem('username');
+    }
+    return '';
   }
 
   getToken: () => Result<string, Error> = function (): Result<string, Error> {
@@ -60,8 +69,8 @@ export class LoginService {
   login(username: string, password: string): Observable<boolean> {
     return new Observable((observer) => {
       this.dataService.login(username, password).subscribe({
-        next: (data: Login) => {
-          this.setToken(data.token).unwrap();
+        next: (data: Token) => {
+          this.setToken(data).unwrap();
           observer.next(true);
         },
         error: (err) => {
