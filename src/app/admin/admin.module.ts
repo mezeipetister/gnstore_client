@@ -9,6 +9,8 @@ import { NavbarComponent } from './partial/navbar/navbar.component';
 import { PosComponent } from './pos/pos.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
+import { ButtonSubmitComponent } from './partial/button-submit/button-submit.component';
+import { ErrorDisplayComponent } from './partial/error-display/error-display.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { ProfileComponent } from './profile/profile.component';
     LayoutComponent,
     NavbarComponent,
     PosComponent,
-    ProfileComponent
+    ProfileComponent,
+    ButtonSubmitComponent,
+    ErrorDisplayComponent
   ],
   imports: [
     CommonModule,

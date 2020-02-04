@@ -1,5 +1,5 @@
 import { HttpError } from './http-error';
-import { Observable, interval } from 'rxjs';
+import { Observable, interval, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { take } from 'rxjs/operators';
 
@@ -25,6 +25,7 @@ export class Model<T> {
      */
     public isLoading: boolean = false;
     public isOk: boolean = false;
+    public status: Subject<T> = new Subject();
     /**
      * Storing error if there any
      */
@@ -37,6 +38,10 @@ export class Model<T> {
                 this.isOk = true;
                 // Animate the button if there is any
                 interval(1500).pipe(take(1)).subscribe(() => this.isOk = false);
+                // Notify subscibers about status change
+                // Send the new data to them
+                this.status.next(this.data);
+                console.log(this.data);
                 // If there is content
                 // set it to the new data value
                 if (val.length > 0) {
@@ -46,6 +51,7 @@ export class Model<T> {
             error: (err) => {
                 this.isLoading = false;
                 this.error = err;
+                // this.status.error(Error("Submit failed"));
             }
         });
     }

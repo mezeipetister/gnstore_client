@@ -6,13 +6,7 @@
                 <p class="subtitle is-4">Itt szerkesztheted a felhasználói adataidat
                 </p>
                 <form (ngSubmit)="profile.submit()" #loginForm="ngForm">
-                    <!-- 
-                        Notification box
-                     -->
-                    <div class="notification is-light" [ngClass]="'is-' + profile.error.kind" *ngIf='profile.error'>
-                        <button class="delete" (click)='error = null'></button>
-                        {{profile.error.message}}
-                    </div>
+                    <error-display [model]="profile"></error-display>
                     <div class="field">
                         <label class="label">Felhasználói név</label>
                         <div class="control">
@@ -37,9 +31,11 @@
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit"
-                                    [class.is-ok]="profile.isOk">Mentés</button>
-                                <button class="button" type="button">Jelszó módosítása</button>
+                                <!-- <button class="button is-info is-outlined" type="submit"
+                                    [class.is-ok]="profile.isOk">Mentés</button> -->
+                                <button-submit [model]="profile">
+                                </button-submit>
+                                <!-- <button class="button" type="button">Jelszó módosítása</button> -->
                             </div>
                         </div>
                     </div>
@@ -49,13 +45,7 @@
                 <p class="subtitle is-4">Kérünk add meg az új jelszavadat
                 </p>
                 <form (ngSubmit)="password.submit()" #passwordForm="ngForm">
-                    <!-- 
-                        Notification box
-                     -->
-                    <div class="notification is-light" [ngClass]="'is-' + password.error.kind" *ngIf="password.error">
-                        <button class="delete" (click)='password.error = null'></button>
-                        {{password.error.message}}
-                    </div>
+                    <error-display [model]="password"></error-display>
                     <div class="field">
                         <label class="label">Új jelszó</label>
                         <div class="control">
@@ -73,8 +63,9 @@
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit"
-                                    [class.is-ok]="password.isOk">Módosítás</button>
+                                <!-- <button class="button is-info is-outlined" type="submit"
+                                    [class.is-ok]="password.isOk">Módosítás</button> -->
+                                <button-submit [model]="password" name="Jelszó módosítása"></button-submit>
                             </div>
                         </div>
                     </div>
