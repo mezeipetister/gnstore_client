@@ -21,6 +21,7 @@ export class LoginService {
   // Notification service
   // Publishin login status to subscribers
   // isLoggedIn: Subject<boolean> = new Subject<boolean>();
+  userName: Subject<string> = new Subject<string>();
 
   ping: () => boolean = function (): boolean {
     let token = this.getToken();
@@ -52,11 +53,16 @@ export class LoginService {
     }
   }
 
-  getUserName(): string {
+  setUserName(username: string) {
+    this.userName.next(username);
+  }
+
+  getUserName() {
     if (localStorage.getItem('username') != null) {
-      return localStorage.getItem('username');
+      this.userName.next(localStorage.getItem('username'));
+    } else {
+      this.userName.next('Error');
     }
-    return '';
   }
 
   getToken: () => Result<string, Error> = function (): Result<string, Error> {

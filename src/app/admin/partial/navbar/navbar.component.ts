@@ -3,7 +3,7 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { Router, Event, NavigationEnd } from '@angular/router';
 import { DataService, Msg } from 'src/app/services/data/data.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, Subscription, throwError } from 'rxjs';
+import { Observable, of, Subscription, throwError, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from 'src/app/class/error-response';
 
@@ -15,6 +15,9 @@ import { ErrorResponse } from 'src/app/class/error-response';
 export class NavbarComponent implements OnInit {
 
   constructor(private loginService: LoginService, private router: Router, private ds: DataService, private http: HttpClient) {
+    // Register username observer
+    this.loginService.userName.subscribe((val) => this.username = val);
+
     this.routerObserver = router.events.subscribe((e: Event) => {
       /**
        * IF Router Event
@@ -28,10 +31,10 @@ export class NavbarComponent implements OnInit {
   isActive: boolean = false;
   quick$: Observable<ErrorResponse>;
   routerObserver: Subscription;
-  username: string = '';
+  username: string;
 
   ngOnInit() {
-    this.username = this.loginService.getUserName();
+    this.loginService.getUserName();
   }
 
   tryQuick() {

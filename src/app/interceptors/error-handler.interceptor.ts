@@ -4,11 +4,11 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpRespo
 import { ErrorResponse } from '../class/error-response';
 import { throwError } from 'rxjs';
 import { HttpError } from '../class/http-error';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
-    constructor(private router: Router) { }
+    constructor() { }
 
     private handleError(error: HttpErrorResponse) {
         if (error.error instanceof ErrorEvent) {
@@ -22,7 +22,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
             }
             // If there is 401 redirect to login
             if (error.status == 401) {
-                this.router.navigateByUrl('/login');
+                // this.router.navigateByUrl('/login');
             }
             if (error.status == 400) {
                 if (error.error instanceof ErrorResponse) {

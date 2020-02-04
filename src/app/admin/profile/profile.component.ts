@@ -5,6 +5,9 @@ import { Profile } from 'src/app/class/profile';
 import { interval, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { HttpError } from 'src/app/class/http-error';
+import { NewPassword } from 'src/app/class/new-password';
+import { LoginService } from 'src/app/services/login/login.service';
+import { Model } from 'src/app/class/model';
 
 @Component({
   selector: 'app-profile',
@@ -13,35 +16,15 @@ import { HttpError } from 'src/app/class/http-error';
 })
 export class ProfileComponent implements OnInit {
 
-  profile: Profile = new Profile("", "", "");
-  error: HttpError | null = null;
-  isLoading: boolean = false;
-  isOk: boolean = false;
-  saving: Subscription = null;
+  profile: Model<Profile> = new Model<Profile>(this.http, '/profile', new Profile("", "", ""));
+  password: Model<NewPassword> = new Model<NewPassword>(this.http, '/profile/new_password', new NewPassword("", ""));
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private loginService: LoginService) {
   }
 
   ngOnInit() {
     this.http.get<Profile>('/profile').subscribe(
-      (value) => this.profile = value,
-      (err) => this.error = err);
+      (value) => this.profile.data = value,
+      (err) => this.profile.error = err);
   }
-
-  submit() {
-    this.isLoading = true;
-    this.saving = this.http.post<Profile>('/profile', this.profile).subscribe(
-      (value) => {
-        this.isLoading = false;
-        this.isOk = true;
-        interval(1500).pipe(take(1)).subscribe(() => this.isOk = false);
-        this.profile = value;
-      },
-      (err) => {
-        this.isLoading = false;
-        this.error = err;
-      }
-    );
-  }
-
 }

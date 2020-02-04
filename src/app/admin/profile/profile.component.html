@@ -5,32 +5,32 @@
                 <h1 class="title">Felhasználói profil</h1>
                 <p class="subtitle is-4">Itt szerkesztheted a felhasználói adataidat
                 </p>
-                <form (ngSubmit)="submit()" #loginForm="ngForm">
+                <form (ngSubmit)="profile.submit()" #loginForm="ngForm">
                     <!-- 
                         Notification box
                      -->
-                    <div class="notification is-light" [ngClass]="'is-' + error.kind" *ngIf='error'>
+                    <div class="notification is-light" [ngClass]="'is-' + profile.error.kind" *ngIf='profile.error'>
                         <button class="delete" (click)='error = null'></button>
-                        {{error.message}}
+                        {{profile.error.message}}
                     </div>
                     <div class="field">
                         <label class="label">Felhasználói név</label>
                         <div class="control">
                             <input class="input" type="text" placeholder="Demo felhasználói név" name="username"
-                                [(ngModel)]="profile.username" readonly disabled>
+                                [(ngModel)]="profile.data.username" readonly disabled>
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
                             <input class="input" type="email" placeholder="demo.elek@email.com"
-                                [(ngModel)]="profile.email" name="email">
+                                [(ngModel)]="profile.data.email" name="email">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Név</label>
                         <div class="control">
-                            <input class="input" type="text" placeholder="Példa név" [(ngModel)]="profile.name"
+                            <input class="input" type="text" placeholder="Példa név" [(ngModel)]="profile.data.name"
                                 name="name">
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                         <div class="control">
                             <div class="buttons">
                                 <button class="button is-info is-outlined" type="submit"
-                                    [class.is-ok]="isOk">Mentés</button>
+                                    [class.is-ok]="profile.isOk">Mentés</button>
                                 <button class="button" type="button">Jelszó módosítása</button>
                             </div>
                         </div>
@@ -48,23 +48,33 @@
                 <h1 class="title">Jelszó módosítása</h1>
                 <p class="subtitle is-4">Kérünk add meg az új jelszavadat
                 </p>
-                <form (ngSubmit)="submit()" #loginForm="ngForm">
+                <form (ngSubmit)="password.submit()" #passwordForm="ngForm">
+                    <!-- 
+                        Notification box
+                     -->
+                    <div class="notification is-light" [ngClass]="'is-' + password.error.kind" *ngIf="password.error">
+                        <button class="delete" (click)='password.error = null'></button>
+                        {{password.error.message}}
+                    </div>
                     <div class="field">
                         <label class="label">Új jelszó</label>
                         <div class="control">
-                            <input class="input" type="password" placeholder="erősjelszó">
+                            <input class="input" type="password" placeholder="erősjelszó"
+                                [(ngModel)]="password.data.password1" name="password1">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Új jelszó ismét</label>
                         <div class="control">
-                            <input class="input" type="password" placeholder="erősjelszó">
+                            <input class="input" type="password" placeholder="erősjelszó"
+                                [(ngModel)]="password.data.password2" name="password2">
                         </div>
                     </div>
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit">Módosítás</button>
+                                <button class="button is-info is-outlined" type="submit"
+                                    [class.is-ok]="password.isOk">Módosítás</button>
                             </div>
                         </div>
                     </div>
