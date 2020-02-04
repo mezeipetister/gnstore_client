@@ -8,9 +8,9 @@
                     <!-- 
                         Notification box
                      -->
-                    <div class="notification is-warning is-light" *ngIf='error'>
+                    <div class="notification is-light" [ngClass]="'is-' + error.kind" *ngIf='error'>
                         <button class="delete" (click)='error = null'></button>
-                        {{error}}
+                        {{error.message}}
                     </div>
                     <div class="field">
                         <label class="label">Felhasználói név</label>

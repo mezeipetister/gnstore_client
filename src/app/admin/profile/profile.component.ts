@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ErrorResponse } from 'src/app/class/error-response';
 import { HttpClient } from '@angular/common/http';
 import { Profile } from 'src/app/class/profile';
+import { interval, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { HttpError } from 'src/app/class/http-error';
 
 @Component({
   selector: 'app-profile',
@@ -11,8 +14,10 @@ import { Profile } from 'src/app/class/profile';
 export class ProfileComponent implements OnInit {
 
   profile: Profile = new Profile("", "", "");
-  error: ErrorResponse | null = null;
+  error: HttpError | null = null;
   isLoading: boolean = false;
+  isOk: boolean = false;
+  saving: Subscription = null;
 
   constructor(private http: HttpClient) {
   }
@@ -20,19 +25,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.http.get<Profile>('/profile').subscribe(
       (value) => this.profile = value,
-      (err) => this.error = err.error);
+      (err) => this.error = err);
   }
 
   submit() {
     this.isLoading = true;
-    this.http.post<Profile>('/profile', this.profile).subscribe(
+    this.saving = this.http.post<Profile>('/profile', this.profile).subscribe(
       (value) => {
         this.isLoading = false;
+        this.isOk = true;
+        interval(1500).pipe(take(1)).subscribe(() => this.isOk = false);
         this.profile = value;
       },
       (err) => {
         this.isLoading = false;
-        this.error = err.error;
+        this.error = err;
       }
     );
   }

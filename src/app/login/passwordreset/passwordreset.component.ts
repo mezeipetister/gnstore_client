@@ -4,6 +4,7 @@ import { ResetPassword } from 'src/app/class/reset-password';
 import { ErrorResponse } from 'src/app/class/error-response';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { HttpError } from 'src/app/class/http-error';
 
 @Component({
   selector: 'app-passwordreset',
@@ -14,7 +15,7 @@ export class PasswordresetComponent implements OnInit {
 
   email: string = '';
   isValid: boolean = true;
-  error: ErrorResponse = null;
+  error: HttpError | null = null;
   isOk: boolean = false;
   isLoading: boolean = false;
 
@@ -30,7 +31,7 @@ export class PasswordresetComponent implements OnInit {
       this.http.post('/login/reset_password', new ResetPassword(this.email)).subscribe(
         () => this.isOk = true,
         (err) => {
-          this.error = err.error;
+          this.error = err;
           this.isLoading = false;
         })
     } else {

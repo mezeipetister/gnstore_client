@@ -38,10 +38,6 @@ export class DataService {
     // })
   }
 
-  getLong(): Observable<Msg> {
-    return (new Request(this.http)).get('/long');
-  }
-
   login(username: string, password: string): Observable<Token> {
     return (new Request(this.http)).post('/login', { username: username, password: password });
   }
@@ -54,22 +50,10 @@ export class Msg {
   ) { }
 }
 
-// class Options {
-//   headers: HttpHeaders;
-//   constructor(token: string) {
-//     this.headers = new HttpHeaders({
-//       'Token': token
-//     })
-//   }
-// }
-
 class Request {
-  // root: string = 'http://localhost:7000';
-  // options: Options;
   http: HttpClient;
   constructor(http: HttpClient) {
     this.http = http;
-    // this.options = new Options('eyJ0eXAiOiJKV1QiLCJraWQiOm51bGwsImFsZyI6IkhTMjU2In0.eyJ1aWQiOiJhZG1pbiIsInJoaW5vIjp0cnVlfQ.PpcImetmYA0VZd7fiUR2of/sBe62b3bOlp7uNYlNnEo');
   }
   get<T>(url: string): Observable<T> {
     return this.http.get<T>(url);

@@ -9,15 +9,15 @@
                     <!-- 
                         Notification box
                      -->
-                    <div class="notification is-warning is-light" *ngIf='error'>
+                    <div class="notification is-light" [ngClass]="'is-' + error.kind" *ngIf='error'>
                         <button class="delete" (click)='error = null'></button>
-                        {{error}}
+                        {{error.message}}
                     </div>
                     <div class="field">
                         <label class="label">Felhasználói név</label>
                         <div class="control">
                             <input class="input" type="text" placeholder="Demo felhasználói név" name="username"
-                                [(ngModel)]="profile.username">
+                                [(ngModel)]="profile.username" readonly disabled>
                         </div>
                     </div>
                     <div class="field">
@@ -37,8 +37,9 @@
                     <div class="field">
                         <div class="control">
                             <div class="buttons">
-                                <button class="button is-info is-outlined" type="submit">Mentés</button>
-                                <button class="button">Jelszó módosítása</button>
+                                <button class="button is-info is-outlined" type="submit"
+                                    [class.is-ok]="isOk">Mentés</button>
+                                <button class="button" type="button">Jelszó módosítása</button>
                             </div>
                         </div>
                     </div>
