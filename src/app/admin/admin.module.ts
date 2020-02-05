@@ -11,6 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ProfileComponent } from './profile/profile.component';
 import { ButtonSubmitComponent } from './partial/button-submit/button-submit.component';
 import { ErrorDisplayComponent } from './partial/error-display/error-display.component';
+import { IssueComponent } from './issue/issue.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ErrorDisplayComponent } from './partial/error-display/error-display.com
     PosComponent,
     ProfileComponent,
     ButtonSubmitComponent,
-    ErrorDisplayComponent
+    ErrorDisplayComponent,
+    IssueComponent
   ],
   imports: [
     CommonModule,

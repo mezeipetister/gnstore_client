@@ -6,6 +6,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { AuthGuard } from '../guard/auth.guard';
 import { PosComponent } from './pos/pos.component';
 import { ProfileComponent } from './profile/profile.component';
+import { IssueComponent } from './issue/issue.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,8 @@ const routes: Routes = [
       { path: '', component: AdminPage1 },
       { path: 'pos', component: PosComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'page2', component: AdminPage2 }
+      { path: 'page2', component: AdminPage2 },
+      { path: 'issue', component: IssueComponent }
     ]
   },
 
