@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login/login.component';
 import { EmptyComponent } from './layout/empty/empty.component';
 import { PasswordresetComponent } from './login/passwordreset/passwordreset.component';
 import { httpInterceptorProviders } from './interceptors';
+import { NotificationService } from './services/notification/notification.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { httpInterceptorProviders } from './interceptors';
     StoreModule,
     AppRoutingModule,
   ],
-  providers: [DataService, LoginService, httpInterceptorProviders],
+  providers: [DataService, LoginService, httpInterceptorProviders, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subscription, throwError, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ErrorResponse } from 'src/app/class/error-response';
+import { NotificationService } from 'src/app/services/notification/notification.service';
+import { Notification } from 'src/app/class/notification';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,15 @@ import { ErrorResponse } from 'src/app/class/error-response';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router, private ds: DataService, private http: HttpClient) {
+  notifications: Notification[] = [];
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private ds: DataService,
+    private http: HttpClient,
+    private notificationService: NotificationService
+  ) {
     // Register username observer
     this.loginService.userName.subscribe((val) => this.username = val);
 
@@ -26,6 +36,8 @@ export class NavbarComponent implements OnInit {
         this.isActive = false;
       }
     });
+
+    this.notificationService.notificationSubscribers.subscribe((val) => this.notifications = val);
   }
 
   isActive: boolean = false;

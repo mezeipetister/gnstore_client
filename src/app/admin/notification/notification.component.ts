@@ -9,23 +9,35 @@ import { HttpClient } from '@angular/common/http';
 })
 export class NotificationComponent implements OnInit {
 
-  notifications: Notification[] = []
+  notifications: Notification[] = [];
+  view: Scene = Scene.All;
+
   constructor(private http: HttpClient) { }
 
-  ngOnInit() {
-    this.get();
+  render(page?: number): Notification[] {
+    return [];
   }
 
-  get() {
+  ngOnInit() {
+    this.getData();
+  }
+
+  getData() {
     this.http.get<Notification[]>('/notification').subscribe((resp) => this.notifications = resp);
   }
 
   delete(id: number) {
-    this.http.delete('/notification/' + id).subscribe(() => this.get());
+    this.http.delete('/notification/' + id).subscribe(() => this.getData());
   }
 
   set_seen(id: number) {
-    this.http.put('/notification/' + id + '/seen', null).subscribe(() => this.get());
+    this.http.put('/notification/' + id + '/seen', null).subscribe(() => this.getData());
   }
 
+}
+
+enum Scene {
+  All,
+  Read,
+  UnRead
 }

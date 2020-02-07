@@ -68,18 +68,17 @@
                             <span class="icon has-text-success">
                                 <i class="fas fa-bell"></i>
                             </span>
-                            <small>(12)</small>
+                            <small>{{notifications.length}}</small>
                         </a>
                     </div>
 
                     <div class="navbar-dropdown dropdown-content">
-                        <a class="dropdown-item">
-                            Új rendelés érkezett
-                        </a>
-                        <hr class="navbar-divider">
-                        <p class="dropdown-item">
-                            <a><strong>@istvanmezei</strong> megemlített egy issue bejegyzésben</a>
-                        </p>
+                        <ng-container *ngFor="let notification of notifications">
+                            <p class="dropdown-item">
+                                {{notification.subject}}
+                            </p>
+                            <hr class="navbar-divider">
+                        </ng-container>
                         <hr class="navbar-divider">
                         <p class="navbar-item has-text-centered is-block">
                             <a routerLink='./notification'>Összes megtekintése</a>
