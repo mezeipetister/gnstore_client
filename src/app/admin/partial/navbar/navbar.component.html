@@ -73,20 +73,22 @@
                         </a>
                     </div>
 
-                    <div class="navbar-dropdown dropdown-content">
-                        <ng-container *ngFor="let notification of notifications">
-                            <p class="dropdown-item">
-                                {{notification.subject}}
+                    <div class="navbar-dropdown dropdown-content" *ngIf="notifications.length > 0">
+                        <ng-container *ngFor="let notification of notifications; index as i">
+                            <hr class="navbar-divider" *ngIf="i > 0 && i <10">
+                            <p class="dropdown-item" *ngIf="i<10">
+                                <a routerLink='./issue'>
+                                    {{notification.subject}}
+                                </a>
                             </p>
-                            <hr class="navbar-divider">
                         </ng-container>
-                        <p class="navbar-item has-text-centered is-block">
-                            <a routerLink='./notification'>Összes megtekintése</a>
+                        <hr class="navbar-divider" *ngIf="notifications.length >= 10">
+                        <p class="navbar-item has-text-centered is-block" *ngIf="notifications.length >= 10">
+                            <a routerLink='./notification'>Összes megtekintése ({{notifications.length}})</a>
                         </p>
                     </div>
                 </div>
                 <div class="navbar-item">
-                    <!-- <button (click)='letQuick()'>Q</button> -->
                     <a class="navbar-item" routerLink='./profile'>{{username}}</a>
                     <div class="buttons">
                         <button class="button" (click)="logout()">Kijelentkezés</button>
