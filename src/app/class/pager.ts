@@ -1,15 +1,16 @@
 import { Subject } from 'rxjs';
 
 export class DataContainer<T> {
-    data: T[];
     /**
      * Displayed items per page
      */
     page_size: number = 10;
-    filter(callbackfn: (value: T, index: number, array: T[]) => value is T, thisArg?: any): Pager<T> {
+    filter(callbackfn: (value: T) => boolean): Pager<T> {
         return new Pager<T>(this.data.filter(callbackfn), this.page_size);
     }
-    constructor() { }
+    constructor(
+        public data: T[]
+    ) { }
 }
 
 export class Pager<T> {
@@ -50,6 +51,13 @@ export class Pager<T> {
      */
     pagination(array: T[], page_size: number, page_number: number): T[] {
         return array.slice((page_number - 1) * page_size, page_number * page_size);
+    }
+    pages(): number[] {
+        let res = [];
+        for (let i = 1; i++; i <= this.max_page_number()) {
+            res.push(i);
+        }
+        return res;
     }
     /**
      * Send paginated data to the subscribers
