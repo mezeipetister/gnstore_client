@@ -65,7 +65,8 @@
                 <div class="navbar-item has-dropdown is-hoverable">
                     <div class="navbar-item">
                         <a routerLink='./notification'>
-                            <span class="icon has-text-success">
+                            <span class="icon" [class.has-text-success]="notifications.length > 0"
+                                [class.has-text-grey]="notifications.length == 0">
                                 <i class="fas fa-bell"></i>
                             </span>
                             <small>{{notifications.length}}</small>
@@ -79,7 +80,6 @@
                             </p>
                             <hr class="navbar-divider">
                         </ng-container>
-                        <hr class="navbar-divider">
                         <p class="navbar-item has-text-centered is-block">
                             <a routerLink='./notification'>Összes megtekintése</a>
                         </p>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Notification } from 'src/app/class/notification';
 import { HttpClient } from '@angular/common/http';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -12,10 +13,11 @@ export class NotificationComponent implements OnInit {
   notifications: Notification[] = [];
   view: Scene = Scene.All;
 
-  constructor(private http: HttpClient) { }
-
-  render(page?: number): Notification[] {
-    return [];
+  constructor(
+    private http: HttpClient,
+    private notificationService: NotificationService
+  ) {
+    this.notificationService.notificationSubscribtion.subscribe((val) => this.notifications = val);
   }
 
   ngOnInit() {
@@ -23,7 +25,8 @@ export class NotificationComponent implements OnInit {
   }
 
   getData() {
-    this.http.get<Notification[]>('/notification').subscribe((resp) => this.notifications = resp);
+    // Request a direct data pull from server
+    this.notificationService.getData();
   }
 
   delete(id: number) {

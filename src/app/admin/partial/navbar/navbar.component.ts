@@ -37,7 +37,11 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.notificationService.notificationSubscribers.subscribe((val) => this.notifications = val);
+    this.notificationService.notificationSubscribtion.subscribe(
+      /**
+       * Filter response to show just the unseen notifications
+       */
+      (val) => this.notifications = val.filter((item) => item.is_new));
   }
 
   isActive: boolean = false;
@@ -46,6 +50,7 @@ export class NavbarComponent implements OnInit {
   username: string;
 
   ngOnInit() {
+    this.notificationService.getData();
     this.loginService.getUserName();
   }
 

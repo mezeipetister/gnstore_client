@@ -37,19 +37,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let notification of render()">
+                        <tr *ngFor="let notification of notifications">
                             <td>
-                                <span class="icon" [class.has-text-info]="notification.is_new">
-                                    <i class="fas fa-envelope"></i>
-                                </span>
+                                <a (click)="set_seen(notification.id)">
+                                    <span class="icon" [class.has-text-info]="notification.is_new"
+                                        [class.has-text-grey]="!notification.is_new">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                </a>
                             </td>
                             <td><small>{{notification.date_created | date:'yyyy-MM-dd HH:mm'}}</small></td>
                             <td>{{notification.subject}}</td>
                             <td>
-                                <div class="buttons">
-                                    <button class="button" (click)="set_seen(notification.id)">Láttam</button>
-                                    <button class="button" (click)="delete(notification.id)">Törlés</button>
-                                </div>
+                                <button class="button" (click)="delete(notification.id)">Törlés</button>
                             </td>
                         </tr>
                     </tbody>
