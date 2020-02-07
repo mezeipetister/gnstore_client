@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Notification } from 'src/app/class/notification';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { Pager } from 'src/app/class/pager';
 
 @Component({
   selector: 'app-notification',
@@ -10,14 +11,13 @@ import { NotificationService } from 'src/app/services/notification/notification.
 })
 export class NotificationComponent implements OnInit {
 
-  notifications: Notification[] = [];
-  view: Scene = Scene.All;
+  notifications: Pager<Notification> = new Pager([], 10);
 
   constructor(
     private http: HttpClient,
     private notificationService: NotificationService
   ) {
-    this.notificationService.notificationSubscribtion.subscribe((val) => this.notifications = val);
+    this.notificationService.notificationSubscribtion.subscribe((val) => this.notifications.set_data(val));
   }
 
   ngOnInit() {

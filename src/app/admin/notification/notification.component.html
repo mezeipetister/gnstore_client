@@ -37,7 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let notification of notifications">
+                        <tr *ngFor="let notification of notifications.view">
                             <td>
                                 <a (click)="set_seen(notification.id)">
                                     <span class="icon" [class.has-text-info]="notification.is_new"
@@ -55,11 +55,11 @@
                     </tbody>
                 </table>
                 <div class="buttons has-addons is-centered">
-                    <button class="button">Előző</button>
-                    <button class="button">1</button>
-                    <button class="button">2</button>
-                    <button class="button">3</button>
-                    <button class="button">Következő</button>
+                    <button class="button" (click)="notifications.back()">Előző</button>
+                    <ng-container *ngFor="let page of notifications.pages()">
+                        <button class="button" (click)="notifications.navigate_to(page)">{{page}}</button>
+                    </ng-container>
+                    <button class="button" (click)="notifications.next()">Következő</button>
                 </div>
             </div>
         </div>
