@@ -10,7 +10,7 @@ import { ErrorResponse } from 'src/app/class/error-response';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent implements OnInit {
 

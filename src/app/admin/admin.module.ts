@@ -12,6 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ButtonSubmitComponent } from './partial/button-submit/button-submit.component';
 import { ErrorDisplayComponent } from './partial/error-display/error-display.component';
 import { IssueComponent } from './issue/issue.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { IssueComponent } from './issue/issue.component';
     ProfileComponent,
     ButtonSubmitComponent,
     ErrorDisplayComponent,
-    IssueComponent
+    IssueComponent,
+    NotificationComponent
   ],
   imports: [
     CommonModule,

@@ -9,7 +9,7 @@ import { Model } from 'src/app/class/model';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
 

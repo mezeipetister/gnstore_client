@@ -1,0 +1,67 @@
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-3">
+                <nav class="panel">
+                    <p class="panel-heading">
+                        Értesítések
+                    </p>
+                    <a class="panel-block is-active">
+                        <span class="panel-icon">
+                            <i class="far fa-square" aria-hidden="true"></i>
+                        </span>
+                        Összes
+                    </a>
+                    <a class="panel-block is-active">
+                        <span class="panel-icon">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                        </span>
+                        Olvasatlan
+                    </a>
+                    <a class="panel-block">
+                        <span class="panel-icon">
+                            <i class="far fa-envelope-open" aria-hidden="true"></i>
+                        </span>
+                        Olvasott
+                    </a>
+                </nav>
+            </div>
+            <div class="column is-9">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th class="is-narrow">Státusz</th>
+                            <th class="is-narrow">Dátum</th>
+                            <th class="">Értesítés</th>
+                            <th class="is-narrow"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let notification of notifications">
+                            <td>
+                                <span class="icon" [class.has-text-info]="notification.is_new">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </td>
+                            <td><small>{{notification.date_created | date:'yyyy-MM-dd HH:mm'}}</small></td>
+                            <td>{{notification.subject}}</td>
+                            <td>
+                                <div class="buttons">
+                                    <button class="button" (click)="set_seen(notification.id)">Láttam</button>
+                                    <button class="button" (click)="delete(notification.id)">Törlés</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="buttons has-addons is-centered">
+                    <button class="button">Előző</button>
+                    <button class="button">1</button>
+                    <button class="button">2</button>
+                    <button class="button">3</button>
+                    <button class="button">Következő</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

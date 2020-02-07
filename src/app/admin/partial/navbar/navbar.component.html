@@ -64,20 +64,26 @@
             <div class="navbar-end">
                 <div class="navbar-item has-dropdown is-hoverable">
                     <div class="navbar-item">
-                        <span class="icon has-text-success">
-                            <i class="fas fa-bell"></i>
-                        </span>
-                        <small>(12)</small>
+                        <a routerLink='./notification'>
+                            <span class="icon has-text-success">
+                                <i class="fas fa-bell"></i>
+                            </span>
+                            <small>(12)</small>
+                        </a>
                     </div>
 
-                    <div class="navbar-dropdown">
-                        <a class="navbar-item">
-                            Új rendelés
+                    <div class="navbar-dropdown dropdown-content">
+                        <a class="dropdown-item">
+                            Új rendelés érkezett
                         </a>
                         <hr class="navbar-divider">
-                        <a class="navbar-item">
-                            Összes megtekintése
-                        </a>
+                        <p class="dropdown-item">
+                            <a><strong>@istvanmezei</strong> megemlített egy issue bejegyzésben</a>
+                        </p>
+                        <hr class="navbar-divider">
+                        <p class="navbar-item has-text-centered is-block">
+                            <a routerLink='./notification'>Összes megtekintése</a>
+                        </p>
                     </div>
                 </div>
                 <div class="navbar-item">

@@ -7,6 +7,7 @@ import { AuthGuard } from '../guard/auth.guard';
 import { PosComponent } from './pos/pos.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IssueComponent } from './issue/issue.component';
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path: 'pos', component: PosComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'page2', component: AdminPage2 },
-      { path: 'issue', component: IssueComponent }
+      { path: 'issue', component: IssueComponent },
+      { path: 'notification', component: NotificationComponent }
     ]
   },
 
