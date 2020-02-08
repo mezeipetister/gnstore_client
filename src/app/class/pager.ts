@@ -15,6 +15,7 @@ export class Pager<T> {
     view: T[] = [];
     set_data(data: T[]) {
         this.data = data;
+        if (this.current_page > this.max_page_number()) { this.current_page = this.max_page_number(); }
         this.set_view();
     }
     /**
@@ -35,7 +36,8 @@ export class Pager<T> {
      * => Ceil(11/5) => 2.2 => 3
      */
     max_page_number(): number {
-        return Math.ceil(this.data.length / this.page_size);
+        let calculated_value = Math.ceil(this.data.length / this.page_size);
+        return calculated_value == 0 ? 1 : calculated_value;
     }
     /**
      * Manual pagination

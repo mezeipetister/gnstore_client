@@ -11,7 +11,7 @@ import { Pager } from 'src/app/class/pager';
 })
 export class NotificationComponent implements OnInit {
 
-  notifications: Pager<Notification> = new Pager([], 10);
+  notifications: Pager<Notification> = new Pager([], 8);
 
   constructor(
     private http: HttpClient,

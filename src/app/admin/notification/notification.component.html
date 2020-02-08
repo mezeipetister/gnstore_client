@@ -54,10 +54,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="buttons has-addons is-centered">
+                <div class="buttons has-addons is-centered" *ngIf="notifications.pages().length > 1">
                     <button class="button" (click)="notifications.back()">Előző</button>
                     <ng-container *ngFor="let page of notifications.pages()">
-                        <button class="button" (click)="notifications.navigate_to(page)">{{page}}</button>
+                        <button class="button" (click)="notifications.navigate_to(page)"
+                            [class.is-info]="notifications.current_page == page">{{page}}</button>
                     </ng-container>
                     <button class="button" (click)="notifications.next()">Következő</button>
                 </div>
