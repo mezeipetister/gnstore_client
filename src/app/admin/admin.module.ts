@@ -15,6 +15,7 @@ import { IssueComponent } from './issue/issue.component';
 import { NotificationComponent } from './notification/notification.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerNewComponent } from './customer/new/new.component';
+import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CustomerNewComponent } from './customer/new/new.component';
     NotificationComponent,
     CustomerComponent,
     CustomerNewComponent,
+    CustomerDetailComponent,
   ],
   imports: [
     CommonModule,

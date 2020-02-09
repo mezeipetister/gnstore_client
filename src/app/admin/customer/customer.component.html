@@ -43,9 +43,11 @@
                 <tr *ngFor="let customer of customers.view">
                     <td [class.has-text-success.has-text-light]="customer.has_user">
                         {{customer.has_user ? 'Online' : 'Offline'}}</td>
-                    <td>{{customer.id}}</td>
                     <td>
-                        <a>{{customer.name}}</a>
+                        <a [routerLink]="['./', customer.id]">{{customer.id}}</a>
+                    </td>
+                    <td>
+                        <a [routerLink]="['./', customer.id]">{{customer.name}}</a>
                     </td>
                     <td>{{customer.tax_number}}</td>
                     <td>{{customer.address.zip}} {{customer.address.location}}, {{customer.address.address}}</td>

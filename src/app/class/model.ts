@@ -41,7 +41,6 @@ export class Model<T> {
                 // Notify subscibers about status change
                 // Send the new data to them
                 this.status.next(this.data);
-                console.log(this.data);
                 // If there is content
                 // set it to the new data value
                 if (val.length > 0) {

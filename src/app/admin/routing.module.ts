@@ -11,6 +11,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerNewComponent } from './customer/new/new.component';
 import { EmptyComponent } from '../layout/empty/empty.component';
+import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
       {
         path: 'customer', component: EmptyComponent, children: [
           { path: '', component: CustomerComponent },
-          { path: 'new', component: CustomerNewComponent }
+          { path: 'new', component: CustomerNewComponent },
+          { path: ':id', component: CustomerDetailComponent }
         ]
       },
       { path: 'issue', component: IssueComponent },
