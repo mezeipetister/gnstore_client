@@ -2,6 +2,6 @@ import { HttpError } from './http-error';
 
 describe('HttpError', () => {
   it('should create an instance', () => {
-    expect(new HttpError()).toBeTruthy();
+    expect(new HttpError("kind", "message")).toBeTruthy();
   });
 });

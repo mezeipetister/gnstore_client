@@ -8,6 +8,9 @@ import { PosComponent } from './pos/pos.component';
 import { ProfileComponent } from './profile/profile.component';
 import { IssueComponent } from './issue/issue.component';
 import { NotificationComponent } from './notification/notification.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerNewComponent } from './customer/new/new.component';
+import { EmptyComponent } from '../layout/empty/empty.component';
 
 const routes: Routes = [
   {
@@ -15,7 +18,12 @@ const routes: Routes = [
       { path: '', component: AdminPage1 },
       { path: 'pos', component: PosComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'page2', component: AdminPage2 },
+      {
+        path: 'customer', component: EmptyComponent, children: [
+          { path: '', component: CustomerComponent },
+          { path: 'new', component: CustomerNewComponent }
+        ]
+      },
       { path: 'issue', component: IssueComponent },
       { path: 'notification', component: NotificationComponent }
     ]
