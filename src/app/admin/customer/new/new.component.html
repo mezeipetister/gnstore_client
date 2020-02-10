@@ -4,13 +4,13 @@
             <h1 class="title">Új vásárló</h1>
             <p class="subtitle is-4">Az adatokat később még szerkesztheted
             </p>
-            <form (ngSubmit)="customer.submit()" #loginForm="ngForm">
+            <form (ngSubmit)="customer.submit()" #newCustomerForm="ngForm">
                 <error-display [model]="customer"></error-display>
                 <div class="field">
                     <label class="label">Felhasználó neve</label>
                     <div class="control">
                         <input class="input" type="text" placeholder="Példa Vásárló" name="name"
-                            [(ngModel)]="customer.data.name" required>
+                            [(ngModel)]="customer.data.name" required autofocus>
                     </div>
                 </div>
                 <div class="field">
