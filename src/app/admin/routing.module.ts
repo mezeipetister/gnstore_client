@@ -12,6 +12,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { CustomerNewComponent } from './customer/new/new.component';
 import { EmptyComponent } from '../layout/empty/empty.component';
 import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
+import { UserComponent } from './user/user.component';
+import { UserNewComponent } from './user/user-new/user-new.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -24,6 +27,13 @@ const routes: Routes = [
           { path: '', component: CustomerComponent },
           { path: 'new', component: CustomerNewComponent },
           { path: ':id', component: CustomerDetailComponent }
+        ]
+      },
+      {
+        path: 'user', component: EmptyComponent, children: [
+          { path: '', component: UserComponent },
+          { path: 'new', component: UserNewComponent },
+          { path: ':id', component: UserDetailComponent }
         ]
       },
       { path: 'issue', component: IssueComponent },

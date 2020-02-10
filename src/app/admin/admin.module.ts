@@ -16,6 +16,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerNewComponent } from './customer/new/new.component';
 import { CustomerDetailComponent } from './customer/customer-detail/customer-detail.component';
+import { UserComponent } from './user/user.component';
+import { UserNewComponent } from './user/user-new/user-new.component';
+import { UserDetailComponent } from './user/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
     CustomerComponent,
     CustomerNewComponent,
     CustomerDetailComponent,
+    UserComponent,
+    UserNewComponent,
+    UserDetailComponent,
   ],
   imports: [
     CommonModule,

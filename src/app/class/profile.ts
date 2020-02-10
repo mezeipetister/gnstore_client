@@ -9,3 +9,12 @@ export class Profile {
         public customers: string[] = []
     ) { }
 }
+
+export class ProfileNew {
+    constructor(
+        public username: string = "",
+        public name: string = "",
+        public email: string = "",
+        public phone: string = "",
+    ) { }
+}
