@@ -19,6 +19,7 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
 import { UserComponent } from './user/user.component';
 import { UserNewComponent } from './user/user-new/user-new.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { LabelComponent } from './issue/label/label.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
     UserComponent,
     UserNewComponent,
     UserDetailComponent,
+    LabelComponent,
   ],
   imports: [
     CommonModule,

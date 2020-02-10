@@ -15,6 +15,7 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
 import { UserComponent } from './user/user.component';
 import { UserNewComponent } from './user/user-new/user-new.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
+import { LabelComponent } from './issue/label/label.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,12 @@ const routes: Routes = [
           { path: ':id', component: UserDetailComponent }
         ]
       },
-      { path: 'issue', component: IssueComponent },
+      {
+        path: 'issue', component: EmptyComponent, children: [
+          { path: '', component: IssueComponent },
+          { path: 'label', component: LabelComponent },
+        ]
+      },
       { path: 'notification', component: NotificationComponent }
     ]
   },
