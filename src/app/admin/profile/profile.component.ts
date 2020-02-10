@@ -13,8 +13,8 @@ import { Model } from 'src/app/class/model';
 })
 export class ProfileComponent implements OnInit {
 
-  profile: Model<Profile> = new Model<Profile>(this.http, '/profile', new Profile("", "", ""));
-  password: Model<NewPassword> = new Model<NewPassword>(this.http, '/profile/new_password', new NewPassword("", ""));
+  profile: Model<Profile> = new Model<Profile>(this.http, '/profile', new Profile());
+  password: Model<NewPassword> = new Model<NewPassword>(this.http, '/profile/new_password', new NewPassword());
 
   constructor(private http: HttpClient, private loginService: LoginService) {
     this.http.get<Profile>('/profile').subscribe(

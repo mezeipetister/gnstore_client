@@ -1,5 +1,5 @@
 export class ResetPassword {
     constructor(
-        public email: string
+        public email: string = ""
     ) { }
 }

@@ -10,7 +10,7 @@ import { Model } from 'src/app/class/model';
 })
 export class CustomerNewComponent implements OnInit {
 
-  customer: Model<CustomerNew> = new Model<CustomerNew>(this.http, "/customer/new", new CustomerNew("", "", "", "", "", "", ""));
+  customer: Model<CustomerNew> = new Model<CustomerNew>(this.http, "/customer/new", new CustomerNew());
 
   submit() {
     this.http.post<CustomerNew>("/customer/new", this.customer).subscribe();
