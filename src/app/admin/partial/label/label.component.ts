@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Label } from 'src/app/class/issue';
 
 @Component({
   selector: 'app-label',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class LabelComponent implements OnInit {
 
   constructor() { }
+
+  @Input() labels: Label[] = [];
 
   ngOnInit() {
   }

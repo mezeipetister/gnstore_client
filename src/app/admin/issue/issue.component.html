@@ -23,248 +23,41 @@
                 <p class="level-item"><a>Összes</a></p>
                 <p class="level-item"><a>Nyitott</a></p>
                 <p class="level-item"><a>Lezárt</a></p>
-                <p class="level-item"><a class="button is-success">Új issue</a></p>
+                <p class="level-item"><a class="button is-success" routerLink="./new">Új issue</a></p>
             </div>
         </nav>
 
         <hr>
 
-        <div class="columns is-mobile">
+        <div class="columns is-mobile" *ngFor="let issue of issues.view; index as i;">
             <div class="column is-narrow">
-                <span class=" icon has-text-success">
+                <span class="icon" [class.has-text-success]="issue.is_open">
                     <i class="fas fa-cookie-bite"></i>
                 </span>
             </div>
             <div class="column">
                 <p class="has-text-weight-bold is-inline">
-                    <a routerLink='./'>Kerti ásót tudunk rendelni?</a>
+                    <a [routerLink]="['./', issue.id]">{{issue.title}}</a>
                 </p>
-                <div class="tags is-inline">
-                    <span class="tag is-warning">Kérdés</span>
-                    <span class="tag is-info">Termék</span>
-                </div>
-                <p class="is-size-7">#19 mezeipetister nyitotta 9 órája</p>
+                <app-label [labels]="issue.labels"></app-label>
+                <p class="is-size-7">#19 {{issue.created_by}} nyitotta 9 órája</p>
             </div>
             <div class="column is-1">
                 <span class="icon">
                     <i class="fas fa-comment-dots"></i>
                 </span>
-                12
+                {{issue.comment_count}}
             </div>
         </div>
 
-        <div class="columns is-mobile">
-            <div class="column is-narrow has-text-success">
-                <span class=" icon">
-                    <i class="fas fa-cookie-bite"></i>
-                </span>
-            </div>
-            <div class="column">
-                <p class="has-text-weight-bold is-inline">Nem működik a bankkártyás fizetés!
-                </p>
-                <div class="tags is-inline">
-                    <span class="tag is-danger">Hiba</span>
-                    <span class="tag is-warning">Sürgős</span>
-                </div>
-                <p>#19 mezeipetister nyitotta 9 órája</p>
-            </div>
-            <div class="column is-1">
-                <span class="icon">
-                    <i class="fas fa-comment-dots"></i>
-                </span>
-                12
-            </div>
+        <div class="buttons has-addons is-centered" *ngIf="issues.pages().length > 1">
+            <button class="button" (click)="issues.back()">Előző</button>
+            <ng-container *ngFor="let page of issues.pages()">
+                <button class="button" (click)="issues.navigate_to(page)"
+                    [class.is-info]="issues.current_page == page">{{page}}</button>
+            </ng-container>
+            <button class="button" (click)="issues.next()">Következő</button>
         </div>
 
-        <div class="columns is-mobile">
-            <div class="column is-narrow">
-                <span class=" icon has-text-success">
-                    <i class="fas fa-cookie-bite"></i>
-                </span>
-            </div>
-            <div class="column">
-                <p class="has-text-weight-bold is-inline">Lorem ipsum dolor sit amet consectetur
-                    adipisicing elit. Vel culpa ad commodi voluptatum magnam sed expedita dolore
-                    soluta necessitatibus.
-                </p>
-                <div class="tags is-inline">
-                    <span class="tag is-warning">Kérdés</span>
-                    <span class="tag is-info">Termék</span>
-                </div>
-                <p>#19 mezeipetister nyitotta 9 órája</p>
-            </div>
-            <div class="column is-1">
-                <span class="icon">
-                    <i class="fas fa-comment-dots"></i>
-                </span>
-                12
-            </div>
-        </div>
-
-        <div class="buttons has-addons is-centered">
-            <button class="button">Előző</button>
-            <button class="button">1</button>
-            <button class="button">2</button>
-            <button class="button">3</button>
-            <button class="button">Következő</button>
-        </div>
-
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <button class="button is-small">
-            <span class="icon is-small">
-                <i class="far fa-star"></i>
-            </span>
-            <span>Követés</span>
-        </button>
-        <p class="title is-size-4">Kerti ásót tudunk rendelni?
-            <span class="is-size-6 has-text-grey">#19</span>
-        </p>
-        <span class="tag is-success">Nyitott</span>
-        <p class="is-inline-block">
-            <a>mezeipetister</a> nyitotta 19 órája
-        </p>
-        <button class="button is-pulled-right is-success">Új issue</button>
-
-        <hr>
-
-        <div class="columns">
-            <div class="column is-9">
-                <div class="card">
-                    <header class="card-header has-background-light">
-                        <p class="card-header-title has-text-weight-normal">
-                            mezeipetister nyitotta 19 órája
-                        </p>
-                        <a href="#" class="card-header-icon" aria-label="more options">
-                            <span class="icon">
-                                <i class="far fa-smile" aria-hidden="true"></i>
-                            </span>
-                        </a>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            <p>
-                                <strong>Kerti ásót tudunk venni?</strong>
-                            </p>
-                            <p>Többen keresnek ásót, de ami van az drága.
-                                Olcsóbbat tudunk jó minőségben hozni?
-                            </p>
-                            <p>Ezeket találtam</p>
-                            <ul>
-                                <li>A</li>
-                                <li>B</li>
-                                <li>C</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- <footer class="card-footer">
-                        <a href="#" class="card-footer-item">Save</a>
-                        <a href="#" class="card-footer-item">Edit</a>
-                        <a href="#" class="card-footer-item">Delete</a>
-                    </footer> -->
-                </div>
-
-                <hr>
-
-                <div class="field">
-                    <label class="label">Hozzászólás</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Textarea"></textarea>
-                    </div>
-                </div>
-
-                <div class="field is-grouped is-grouped-right">
-                    <div class="control">
-                        <button class="button is-success">Hozzászólás</button>
-                    </div>
-                    <div class="control">
-                        <button class="button is-success is-light">Issue lezárása</button>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-3">
-                <p class="title is-size-6">Címkék</p>
-                <p class="field">
-                    <span class="tag is-warning is-flex-desktop">Kérdés</span>
-                </p>
-                <p class="field">
-                    <span class="tag is-info is-flex-desktop">Termék</span>
-                </p>
-                <hr>
-                <p class="title is-size-6 is-inline-block">Felelős</p>
-                <button class="button is-small is-pulled-right">Új</button>
-                <p class="field">
-                    Demo Elek
-                </p>
-                <hr>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="container">
-        <p class="title is-size-4">Kerti ásót tudunk rendelni?</p>
-
-        <div class="columns">
-            <div class="column is-9">
-                <div class="field">
-                    <label class="label">Issue címe</label>
-                    <div class="control">
-                        <input class="input" type="text" placeholder="Issue címe">
-                    </div>
-                </div>
-
-                <div class="field">
-                    <label class="label">Leírás</label>
-                    <div class="control">
-                        <textarea class="textarea" placeholder="Textarea"></textarea>
-                    </div>
-                </div>
-
-                <div class="field is-grouped is-grouped-right">
-                    <div class="control">
-                        <button class="button is-success">Létrehozás</button>
-                    </div>
-                </div>
-            </div>
-            <div class="column is-3">
-                <a class="has-text-grey">
-                    <span class="subtitle is-size-6 has-text-weight-medium is-inline-block">Címkék</span>
-                    <div class="dropdown is-active is-pulled-right is-right">
-                        <div class="dropdown-trigger">
-                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                                <!-- <span>Dropdown button</span> -->
-                                <span class="icon is-small">
-                                    <i class="fas fa-cog"></i>
-                                </span>
-                            </button>
-                        </div>
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                <label class="checkbox has-text-info dropdown-item">
-                                    <input type="checkbox">
-                                    Kérdés
-                                </label>
-                                <label class="checkbox has-text-warning dropdown-item">
-                                    <input type="checkbox">
-                                    Hiba
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-                <p class="field">
-                    <span class="tag is-warning is-flex-desktop">Kérdés</span>
-                </p>
-                <p class="field">
-                    <span class="tag is-info is-flex-desktop">Termék</span>
-                </p>
-                <hr>
-            </div>
-        </div>
     </div>
 </section>

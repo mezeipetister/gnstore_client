@@ -15,7 +15,8 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
 import { UserComponent } from './user/user.component';
 import { UserNewComponent } from './user/user-new/user-new.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
-import { LabelComponent } from './issue/label/label.component';
+import { IssueNewComponent } from './issue/issue-new/issue-new.component';
+import { IssueDetailComponent } from './issue/issue-detail/issue-detail.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,8 @@ const routes: Routes = [
       {
         path: 'issue', component: EmptyComponent, children: [
           { path: '', component: IssueComponent },
-          { path: 'label', component: LabelComponent },
+          { path: 'new', component: IssueNewComponent },
+          { path: ':id', component: IssueDetailComponent }
         ]
       },
       { path: 'notification', component: NotificationComponent }

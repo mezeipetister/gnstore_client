@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IssueShort } from 'src/app/class/issue';
+import { Pager } from 'src/app/class/pager';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-issue',
@@ -6,26 +9,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./issue.component.sass']
 })
 export class IssueComponent implements OnInit {
-  /**
-   * Tag
-   * - id: uzise,
-   * - label: String,
-   * - style: String,
-   * 
-   * Issue
-   * - id: usize,
-   * - date_created: DateTime<Utc>,
-   * - created_by: String
-   * - description: String,
-   * - assigned_to: String,
-   * - subscribers: Vec<String>,
-   * - comments: Vec<Comment>,
-   * - is_open: bool,
-   * - tags: Vec<Tag>,
-   */
-  constructor() { }
+  filter: string = "";
+  issues: Pager<IssueShort> = new Pager([], 10);
+  buffer: IssueShort[] = null;
 
-  ngOnInit() {
+  filterSubmit() {
+    /**
+     * Filter data
+     */
+    this.issues.data = this.buffer.filter((c) =>
+      c.title.toUpperCase().includes(this.filter.toUpperCase()));
+    /**
+     * Reset pagination
+     */
+    this.issues.navigate_to(1);
   }
 
+  constructor(private http: HttpClient) { }
+
+  ngOnInit() {
+    this.http.get<IssueShort[]>("/issue/all").subscribe((val) => {
+      this.issues.set_data(val);
+      this.buffer = val;
+    });
+  }
 }

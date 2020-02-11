@@ -1,0 +1,66 @@
+<section class="section">
+    <div class="container">
+        <p class="title is-size-4">Új issue</p>
+
+        <div class="columns">
+            <div class="column is-9">
+                <form (ngSubmit)="submit()" #newIssueForm="ngForm">
+                    <div class="field">
+                        <label class="label">Issue címe</label>
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Issue címe" [(ngModel)]="issue.title"
+                                name="title" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Leírás</label>
+                        <div class="control">
+                            <textarea class="textarea" placeholder="Textarea" [(ngModel)]="issue.description"
+                                name="description" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="field is-grouped is-grouped-right">
+                        <div class="control">
+                            <button class="button is-success" type="submit">Létrehozás</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="column is-3">
+                <a class="has-text-grey">
+                    <span class="subtitle is-size-6 has-text-weight-medium is-inline-block">Címkék</span>
+                    <div class="dropdown is-active is-pulled-right is-right">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span class="icon is-small">
+                                    <i class="fas fa-cog"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <label class="checkbox has-text-info dropdown-item">
+                                    <input type="checkbox">
+                                    Kérdés
+                                </label>
+                                <label class="checkbox has-text-warning dropdown-item">
+                                    <input type="checkbox">
+                                    Hiba
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <p class="field">
+                    <span class="tag is-warning is-flex-desktop">Kérdés</span>
+                </p>
+                <p class="field">
+                    <span class="tag is-info is-flex-desktop">Termék</span>
+                </p>
+                <hr>
+            </div> -->
+        </div>
+    </div>
+</section>

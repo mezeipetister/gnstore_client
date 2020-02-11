@@ -19,7 +19,9 @@ import { CustomerDetailComponent } from './customer/customer-detail/customer-det
 import { UserComponent } from './user/user.component';
 import { UserNewComponent } from './user/user-new/user-new.component';
 import { UserDetailComponent } from './user/user-detail/user-detail.component';
-import { LabelComponent } from './issue/label/label.component';
+import { LabelComponent } from './partial/label/label.component';
+import { IssueNewComponent } from './issue/issue-new/issue-new.component';
+import { IssueDetailComponent } from './issue/issue-detail/issue-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { LabelComponent } from './issue/label/label.component';
     UserNewComponent,
     UserDetailComponent,
     LabelComponent,
+    IssueNewComponent,
+    IssueDetailComponent,
   ],
   imports: [
     CommonModule,
