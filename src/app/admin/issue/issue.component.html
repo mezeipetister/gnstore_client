@@ -5,16 +5,19 @@
             <!-- Left side -->
             <div class="level-left">
                 <div class="level-item">
-                    <div class="field has-addons">
-                        <p class="control">
-                            <input class="input" type="text" placeholder="Keresés ...">
-                        </p>
-                        <p class="control">
-                            <button class="button">
-                                Keresés
-                            </button>
-                        </p>
-                    </div>
+                    <form (ngSubmit)="filterSubmit()">
+                        <div class="field has-addons">
+                            <p class="control">
+                                <input class="input" type="text" placeholder="Keresés ..." [(ngModel)]="filter"
+                                    name="filter">
+                            </p>
+                            <p class="control">
+                                <button class="button" type="submit">
+                                    Keresés
+                                </button>
+                            </p>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -31,9 +34,14 @@
 
         <div class="columns is-mobile" *ngFor="let issue of issues.view; index as i;">
             <div class="column is-narrow">
-                <span class="icon" [class.has-text-success]="issue.is_open">
-                    <i class="fas fa-cookie-bite"></i>
-                </span>
+                <a [routerLink]="['./', issue.id]">
+                    <span class="icon has-text-danger" *ngIf="!issue.is_open">
+                        <i class="far fa-circle"></i>
+                    </span>
+                    <span class="icon has-text-success" *ngIf="issue.is_open">
+                        <i class="fas fa-circle"></i>
+                    </span>
+                </a>
             </div>
             <div class="column">
                 <p class="has-text-weight-bold is-inline">
@@ -42,7 +50,10 @@
                 <app-label [labels]="issue.labels"></app-label>
                 <p class="is-size-7">#19 {{issue.created_by}} nyitotta 9 órája</p>
             </div>
-            <div class="column is-1">
+            <div class="column is-narrow has-text-grey">
+                <small>@{{issue.assigned_to}}</small>
+            </div>
+            <div class="column is-1 has-text-grey">
                 <span class="icon">
                     <i class="fas fa-comment-dots"></i>
                 </span>

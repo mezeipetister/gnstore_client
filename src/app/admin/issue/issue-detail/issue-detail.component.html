@@ -7,7 +7,7 @@
         </div>
         <div class="columns is-vcentered">
             <div class="column is-narrow">
-                <span class="tag is-medium" [class.is-dark]="!issue.is_open"
+                <span class="tag is-large is-light" [class.is-danger]="!issue.is_open"
                     [class.is-success]="issue.is_open">{{issue.is_open ? 'Nyitott' : 'Lezárt'}}</span>
             </div>
             <div class="column">
@@ -136,9 +136,9 @@
                         <button class="button is-success is-outlined" (click)="commentIssue()">Hozzászólás</button>
                     </div>
                     <div class="control" [ngSwitch]="issue.is_open">
-                        <button *ngSwitchCase="true" class="button is-success is-light" (click)="closeIssue()">Issue
+                        <button *ngSwitchCase="true" class="button is-danger is-light" (click)="closeIssue()">Issue
                             lezárása</button>
-                        <button *ngSwitchCase="false" class="button is-warning is-light" (click)="openIssue()">Issue
+                        <button *ngSwitchCase="false" class="button is-success is-light" (click)="openIssue()">Issue
                             megnyitása</button>
                     </div>
                 </div>
