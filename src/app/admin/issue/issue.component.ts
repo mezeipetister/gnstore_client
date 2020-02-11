@@ -17,12 +17,38 @@ export class IssueComponent implements OnInit {
     /**
      * Filter data
      */
-    this.issues.data = this.buffer.filter((c) =>
-      c.title.toUpperCase().includes(this.filter.toUpperCase()));
+    this.issues.data = this.buffer.filter((i) =>
+      i.title.toUpperCase().includes(this.filter.toUpperCase()));
     /**
      * Reset pagination
      */
     this.issues.navigate_to(1);
+  }
+
+  screenAll: boolean = true;
+  screenOpen: boolean = false;
+  screenClosed: boolean = false;
+
+  showAll() {
+    this.issues.data = this.buffer.filter((i) => i.is_open || !i.is_open);
+    this.issues.navigate_to(1);
+    this.screenAll = true;
+    this.screenClosed = false;
+    this.screenOpen = false;
+  }
+  showOpen() {
+    this.issues.data = this.buffer.filter((i) => i.is_open);
+    this.issues.navigate_to(1);
+    this.screenAll = false;
+    this.screenClosed = false;
+    this.screenOpen = true;
+  }
+  showClosed() {
+    this.issues.data = this.buffer.filter((i) => !i.is_open);
+    this.issues.navigate_to(1);
+    this.screenAll = false;
+    this.screenClosed = true;
+    this.screenOpen = false;
   }
 
   constructor(private http: HttpClient) { }

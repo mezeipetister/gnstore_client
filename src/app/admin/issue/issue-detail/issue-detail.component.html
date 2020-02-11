@@ -29,11 +29,11 @@
                         <p class="card-header-title has-text-weight-normal">
                             Leírás
                         </p>
-                        <a href="#" class="card-header-icon" aria-label="more options">
+                        <!-- <a href="#" class="card-header-icon" aria-label="more options">
                             <span class="icon">
                                 <i class="far fa-smile" aria-hidden="true"></i>
                             </span>
-                        </a>
+                        </a> -->
                     </header>
                     <div class="card-content">
                         <div class="content">
@@ -104,9 +104,9 @@
                                     {{event.created_by}} hozzászólt ekkor: {{event.date_created | date:'medium'}}
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
-                                    <span class="icon">
-                                        <i class="far fa-smile" aria-hidden="true"></i>
-                                    </span>
+                                    <!-- <span class="icon has-text-danger">
+                                        <i class="far fa-heart" aria-hidden="true"></i>
+                                    </span> -->
                                     <span *ngIf="$any(event.kind.body).liked.length > 0">
                                         + {{$any(event.kind.body).liked.length}}
                                     </span>
