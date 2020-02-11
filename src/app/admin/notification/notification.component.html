@@ -48,7 +48,7 @@
                             </td>
                             <td><small>{{notification.date_created | date:'yyyy-MM-dd HH:mm'}}</small></td>
                             <td>
-                                <a [routerLink]="'/a'+notification.location">
+                                <a [routerLink]="'/a'+notification.location" (click)="set_seen(notification.id)">
                                     {{notification.subject}}
                                 </a>
                             </td>
