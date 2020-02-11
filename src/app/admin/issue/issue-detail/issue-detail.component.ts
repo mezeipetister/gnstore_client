@@ -30,7 +30,10 @@ export class IssueDetailComponent implements OnInit {
   }
 
   commentIssue() {
-    this.http.post<IssueLong>("/issue/" + this.id + "/comment", { text: this.comment }).subscribe((val) => this.issue = val);
+    this.http.post<IssueLong>("/issue/" + this.id + "/comment", { text: this.comment }).subscribe((val) => {
+      this.issue = val;
+      this.comment = "";
+    });
   }
 
 }

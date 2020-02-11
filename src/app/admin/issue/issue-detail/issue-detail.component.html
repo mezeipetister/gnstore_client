@@ -1,20 +1,24 @@
 <section class="section">
     <div class="container">
-        <!-- <button class="button is-small">
-            <span class="icon is-small">
-                <i class="far fa-star"></i>
-            </span>
-            <span>Követés</span>
-        </button> -->
-        <p class="title is-size-4">{{issue.title}}
-            <!-- <span class="is-size-6 has-text-grey">#19</span> -->
-        </p>
-        <span class="tag" [class.is-dark]="!issue.is_open"
-            [class.is-warning]="issue.is_open">{{issue.is_open ? 'Nyitott' : 'Lezárt'}}</span>
-        <p class="is-inline-block">
-            {{issue.created_by}} nyitotta 19 órája
-        </p>
-        <button class="button is-pulled-right is-success">Új issue</button>
+        <div class="columns is-vcentered">
+            <div class="column is-12">
+                <p class="title is-size-4">{{issue.title}}</p>
+            </div>
+        </div>
+        <div class="columns is-vcentered">
+            <div class="column is-narrow">
+                <span class="tag is-medium" [class.is-dark]="!issue.is_open"
+                    [class.is-success]="issue.is_open">{{issue.is_open ? 'Nyitott' : 'Lezárt'}}</span>
+            </div>
+            <div class="column">
+                <p class="is-inline-block">
+                    {{issue.created_by}} nyitotta {{issue.date_created | date:'medium'}}
+                </p>
+            </div>
+            <div class="column is-narrow">
+                <button class="button is-success">Új issue</button>
+            </div>
+        </div>
 
         <hr>
 
@@ -23,7 +27,7 @@
                 <div class="card">
                     <header class="card-header has-background-light">
                         <p class="card-header-title has-text-weight-normal">
-                            {{issue.created_by}} nyitotta 19 órája
+                            Leírás
                         </p>
                         <a href="#" class="card-header-icon" aria-label="more options">
                             <span class="icon">
@@ -43,20 +47,68 @@
                     </footer> -->
                 </div>
 
-                <div *ngFor="let event of issue.events">
+                <div *ngFor="let event of issue.events; index as i;">
+                    <hr>
                     <div [ngSwitch]="event.kind.type">
-                        <p class="content" *ngSwitchCase="'Closed'">
-                            {{event.created_by}} lezárta ekkor: {{event.date_created | date}}</p>
-                        <p class="content" *ngSwitchCase="'Opened'">
-                            {{event.created_by}} megnyitotta ekkor: {{event.date_created | date}}</p>
+                        <!--
+                            Label Added
+                        -->
+                        <p class="content has-text-centered" *ngSwitchCase="'LabelAdded'">
+                            <span class="icon is-medium">
+                                <i class="fas fa-tag"></i>
+                            </span>
+                            {{event.created_by}} hozzáadta az alábbi címkét <app-label
+                                [labels]="[$any(event.kind.body)]"></app-label><br> ekkor:
+                            {{event.date_created | date:'medium'}}
+                        </p>
+                        <!--
+                            Label Removed
+                        -->
+                        <p class="content has-text-centered" *ngSwitchCase="'LabelRemoved'">
+                            <span class="icon is-medium">
+                                <i class="fas fa-tag"></i>
+                            </span>
+                            {{event.created_by}} törölte az alábbi címkét <app-label [labels]="[$any(event.kind.body)]">
+                            </app-label><br> ekkor: {{event.date_created | date:'medium'}}</p>
+                        <!--
+                            Issue Closed        
+                        -->
+                        <p class="content has-text-centered" *ngSwitchCase="'Closed'">
+                            <span class="icon">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                            {{event.created_by}} lezárta ekkor: {{event.date_created | date:'medium'}}</p>
+                        <!--
+                            Issue Open
+                        -->
+                        <p class="content has-text-centered" *ngSwitchCase="'Opened'">
+                            <span class="icon">
+                                <i class="fas fa-lock-open"></i>
+                            </span>
+                            {{event.created_by}} megnyitotta ekkor: {{event.date_created | date:'medium'}}</p>
+                        <!--
+                            Issue Assigned To
+                        -->
+                        <p class="content has-text-centered" *ngSwitchCase="'AssignedTo'">
+                            <span class="icon">
+                                <i class="fas fa-lock-open"></i>
+                            </span>
+                            {{event.created_by}} hozzárendelte a feladatot => <strong>{{$any(event.kind.body)}}</strong>
+                            <br> ekkor: {{event.date_created | date:'medium'}}</p>
+                        <!--
+                            Issue Comment
+                        -->
                         <div class="card" *ngSwitchCase="'NewComment'">
                             <header class="card-header has-background-light">
                                 <p class="card-header-title has-text-weight-normal">
-                                    {{event.created_by}} nyitotta {{event.date_created | date}}
+                                    {{event.created_by}} hozzászólt ekkor: {{event.date_created | date:'medium'}}
                                 </p>
                                 <a href="#" class="card-header-icon" aria-label="more options">
                                     <span class="icon">
                                         <i class="far fa-smile" aria-hidden="true"></i>
+                                    </span>
+                                    <span *ngIf="$any(event.kind.body).liked.length > 0">
+                                        + {{$any(event.kind.body).liked.length}}
                                     </span>
                                 </a>
                             </header>
@@ -74,7 +126,7 @@
                 <div class="field">
                     <label class="label">Hozzászólás</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="Textarea" [(ngModel)]="comment"
+                        <textarea class="textarea" placeholder="Hozzászólás" [(ngModel)]="comment"
                             name="comment"></textarea>
                     </div>
                 </div>
