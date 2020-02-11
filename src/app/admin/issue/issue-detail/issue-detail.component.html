@@ -98,7 +98,7 @@
                         <!--
                             Issue Comment
                         -->
-                        <div class="card" *ngSwitchCase="'NewComment'">
+                        <div class="card" *ngSwitchCase="'NewComment'" [attr.id]="$any(event.kind.body).id">
                             <header class="card-header has-background-light">
                                 <p class="card-header-title has-text-weight-normal">
                                     {{event.created_by}} hozzászólt ekkor: {{event.date_created | date:'medium'}}
@@ -147,11 +147,30 @@
                 <p class="title is-size-6">Címkék</p>
                 <app-label [labels]="issue.labels"></app-label>
                 <hr>
-                <p class="title is-size-6 is-inline-block">Felelős</p>
-                <button class="button is-small is-pulled-right">Új</button>
-                <p class="field">
-                    {{issue.assigned_to}}
-                </p>
+                <p class="title is-size-6">Felelős</p>
+                <!-- TODO: Maybe using this? https://www.npmjs.com/package/ng-click-outside -->
+                <div class="dropdown" [class.is-active]="dropdownActive">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2"
+                            (click)="dropdownActive ? dropdownActive = false : dropdownActive = true">
+                            <span>{{issue.assigned_to}}</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+                        <div class="dropdown-content">
+                            <div *ngFor="let user of users; index as i;">
+                                <hr class="dropdown-divider" *ngIf="i > 0">
+                                <div class="dropdown-item">
+                                    <small><a
+                                            (click)="assignTo(user.username); dropdownActive = false;">{{user.name}}</a></small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr>
             </div>
         </div>

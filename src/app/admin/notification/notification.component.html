@@ -47,7 +47,11 @@
                                 </a>
                             </td>
                             <td><small>{{notification.date_created | date:'yyyy-MM-dd HH:mm'}}</small></td>
-                            <td>{{notification.subject}}</td>
+                            <td>
+                                <a [routerLink]="'/a'+notification.location">
+                                    {{notification.subject}}
+                                </a>
+                            </td>
                             <td>
                                 <button class="button" (click)="delete(notification.id)">Törlés</button>
                             </td>

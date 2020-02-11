@@ -20,7 +20,7 @@
                     Értékesítés
                 </a>
 
-                <a class="navbar-item" (click)='tryQuick()'>
+                <a class="navbar-item">
                     Termékek
                 </a>
 
@@ -81,8 +81,9 @@
                         <ng-container *ngFor="let notification of notifications; index as i;">
                             <hr class="navbar-divider" *ngIf="i > 0 && i <10">
                             <p class="dropdown-item" *ngIf="i<10">
-                                <a routerLink='./issue'>
-                                    {{notification.subject}}
+                                <a [routerLink]="'/a'+notification.location"
+                                    (click)="set_notification_seen(notification.id)">
+                                    <small>{{notification.subject}}</small>
                                 </a>
                             </p>
                         </ng-container>

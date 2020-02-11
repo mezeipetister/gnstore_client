@@ -54,16 +54,9 @@ export class NavbarComponent implements OnInit {
     this.loginService.getUserName();
   }
 
-  tryQuick() {
-    this.ds.getQuick().subscribe({ next: (val) => console.log(val), error: (err) => console.log(err) });
+  set_notification_seen(id: number) {
+    this.http.put('/notification/' + id + '/seen', null).subscribe();
   }
-
-  // letQuick() {
-  //   this.quick$ = this.http.get<ErrorResponse>('/quick').pipe(catchError((err) => {
-  //     console.log(err.error);
-  //     return of(new Msg(''));
-  //   }));
-  // }
 
   logout() {
     let url = this.router.url;
