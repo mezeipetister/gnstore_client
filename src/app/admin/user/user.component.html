@@ -34,9 +34,9 @@
             <thead>
                 <tr>
                     <th class="is-narrow">ID</th>
-                    <th>Név</th>
-                    <th class="is-narrow">Email</th>
-                    <th class="is-narrow">Telefon</th>
+                    <th class="is-narrow-mobile">Név</th>
+                    <th class="is-narrow is-hidden-mobile">Email</th>
+                    <th class="is-narrow is-hidden-mobile">Telefon</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,8 +47,8 @@
                     <td>
                         {{user.name}}
                     </td>
-                    <td>{{user.email}}</td>
-                    <td>{{user.phone}}</td>
+                    <td class="is-hidden-mobile">{{user.email}}</td>
+                    <td class="is-hidden-mobile">{{user.phone}}</td>
                 </tr>
             </tbody>
         </table>

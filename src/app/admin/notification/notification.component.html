@@ -30,7 +30,7 @@
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
-                            <th class="is-narrow">Státusz</th>
+                            <th class="is-narrow is-hidden-mobile">Státusz</th>
                             <th class="is-narrow">Dátum</th>
                             <th class="">Értesítés</th>
                             <th class="is-narrow"></th>
@@ -38,7 +38,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let notification of notifications.view">
-                            <td>
+                            <td class="is-hidden-mobile">
                                 <a (click)="set_seen(notification.id)">
                                     <span class="icon" [class.has-text-info]="notification.is_new"
                                         [class.has-text-grey]="!notification.is_new">
@@ -48,7 +48,8 @@
                             </td>
                             <td><small>{{notification.date_created | date:'yyyy-MM-dd HH:mm'}}</small></td>
                             <td>
-                                <a [routerLink]="'/a'+notification.location" (click)="set_seen(notification.id)">
+                                <a [routerLink]="'/a'+notification.location" (click)="set_seen(notification.id)"
+                                    [class.has-text-dark]="!notification.is_new">
                                     {{notification.subject}}
                                 </a>
                             </td>

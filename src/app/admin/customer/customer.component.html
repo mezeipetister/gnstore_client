@@ -29,27 +29,27 @@
 
         <hr>
 
-        <table class="table is-striped">
+        <table class="table is-striped is-fullwidth">
             <thead>
                 <tr>
-                    <th class="is-narrow">Online</th>
-                    <th class="is-narrow">ID</th>
+                    <th class="is-narrow is-hidden-mobile">Online</th>
+                    <th class="is-narrow is-hidden-mobile">ID</th>
                     <th class="is-narrow">Vásárló számlázási neve</th>
-                    <th class="is-narrow">Adószám</th>
+                    <th class="is-narrow is-hidden-mobile">Adószám</th>
                     <th>Számlázási cím</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let customer of customers.view; index as i;">
-                    <td [class.has-text-success.has-text-light]="customer.has_user">
+                    <td [class.has-text-success.has-text-light]="customer.has_user" class="is-hidden-mobile">
                         {{customer.has_user ? 'Online' : 'Offline'}}</td>
-                    <td>
+                    <td class="is-hidden-mobile">
                         <a [routerLink]="['./', customer.id]" tabindex="0">{{customer.id}}</a>
                     </td>
                     <td>
                         <a [routerLink]="['./', customer.id]" tabindex="1">{{customer.name}}</a>
                     </td>
-                    <td>{{customer.tax_number}}</td>
+                    <td class="is-hidden-mobile">{{customer.tax_number}}</td>
                     <td>{{customer.address.zip}} {{customer.address.location}}, {{customer.address.address}}</td>
                 </tr>
             </tbody>

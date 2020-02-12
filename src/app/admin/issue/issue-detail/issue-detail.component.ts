@@ -3,6 +3,7 @@ import { IssueLong } from 'src/app/class/issue';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Profile } from 'src/app/class/profile';
+import { markdown } from 'markdown';
 
 @Component({
   selector: 'app-issue-detail',
@@ -32,6 +33,10 @@ export class IssueDetailComponent implements OnInit {
       this.issue = val;
       this.comment = "";
     });
+  }
+
+  toHtml(text: string): string {
+    return markdown.toHTML(text);
   }
 
   loadUsers() {
