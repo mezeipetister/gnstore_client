@@ -3,12 +3,12 @@
  * Napi teendőim
  * => 2020.02.11.
  * =============
- * AKG-s vagyok-e? Kell-e képzés?
- * Skoda kamat befizetés
- * Kata+ befizetés
- * Jelentkezés Farmmix
- * Peti jön 12.00-13.00 között
- * Atisék jönnek?
+ * ( ) AKG-s vagyok-e? Kell-e képzés?
+ * ( ) Skoda kamat befizetés
+ * ( ) Kata+ befizetés
+ * (*) jelentkezés Farmmix
+ * (*) Peti jön 12.00-13.00 között
+ * (*) Atisék jönnek?
  */
 
 /**
