@@ -3,7 +3,8 @@ import { IssueLong } from 'src/app/class/issue';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { Profile } from 'src/app/class/profile';
-import { markdown } from 'markdown';
+// import { markdown } from 'markdown';
+import MarkdownIt from 'markdown-it';
 
 @Component({
   selector: 'app-issue-detail',
@@ -36,7 +37,13 @@ export class IssueDetailComponent implements OnInit {
   }
 
   toHtml(text: string): string {
-    return markdown.toHTML(text);
+    // return markdown.toHTML(text);
+    let md = new MarkdownIt({
+      html: true,
+      linkify: true,
+      typographer: true
+    });
+    return md.render(text);
   }
 
   loadUsers() {

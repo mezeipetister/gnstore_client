@@ -5,6 +5,15 @@
                 <strong>Gardenova</strong>
                 <!-- <strong>Gardenzilla</strong> -->
             </a>
+            <div class="navbar-item is-hidden-desktop">
+                <a routerLink='./notification'>
+                    <span class="icon" [class.has-text-success]="notifications.length > 0"
+                        [class.has-text-grey]="notifications.length == 0">
+                        <i class="fas fa-bell"></i>
+                    </span>
+                    <small class="has-text-dark">{{notifications.length}}</small>
+                </a>
+            </div>
 
             <a role="button" class="navbar-burger burger" [ngClass]="{'is-active': isActive}" aria-label="menu"
                 aria-expanded="false" data-target="navbarBasicExample" (click)="isActive = isActive ? false : true">
