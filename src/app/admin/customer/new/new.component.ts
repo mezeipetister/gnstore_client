@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerNew } from 'src/app/class/customer-new';
 import { HttpClient } from '@angular/common/http';
 import { Model } from 'src/app/class/model';
+import { Router } from '@angular/router';
+import { Customer } from 'src/app/class/customer';
 
 @Component({
   selector: 'app-new',
@@ -10,13 +12,13 @@ import { Model } from 'src/app/class/model';
 })
 export class CustomerNewComponent implements OnInit {
 
-  customer: Model<CustomerNew> = new Model<CustomerNew>(this.http, "/customer/new", new CustomerNew());
+  customer: CustomerNew = new CustomerNew();
 
   submit() {
-    this.http.post<CustomerNew>("/customer/new", this.customer).subscribe();
+    this.http.post<Customer>("/customer/new", this.customer).subscribe((resp) => this.router.navigateByUrl("/a/customer/" + resp.id));
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
   }
